@@ -1,0 +1,7 @@
+.popup__form {
+    width: 83%;
+    margin-right: auto;
+    margin-left: auto;
+    border: none;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.2);;
+}
