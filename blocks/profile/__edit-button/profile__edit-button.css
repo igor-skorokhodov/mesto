@@ -2,6 +2,15 @@
     grid-row: 1;
     grid-column: 2;
     grid-area: button;
+    height: 24px;
+    width: 24px;
+    border: 1px solid #FFFFFF;
+    background: transparent;
+    box-sizing: border-box;
     align-self: flex-end;
     margin-bottom: 8px;
+}
+
+.profile__edit-button:hover {
+    opacity: 0.6;
 }

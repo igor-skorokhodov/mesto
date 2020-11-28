@@ -11,3 +11,12 @@
     grid-area: profession;
     align-self: flex-start;
 }
+
+@media screen and (max-width: 950px) {
+    .profile__profession {
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}

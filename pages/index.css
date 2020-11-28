@@ -25,3 +25,4 @@
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__form/_margin/popup__form_margin.css);
+@import url(../blocks/popup/_actve/_active/popup_active.css);

@@ -1,3 +1,18 @@
 .element__heart {
     margin-right: 15px;
+    padding: 0;
+    width: 23px;
+    height: 23px;
+    background: transparent;
+    border: none;
+    align-items: center;
 }
+
+.element__heart:hover {
+    opacity: 0.5;
+}
+
+.element__heart:focus {
+    border: none;
+    outline: none !important;
+    }

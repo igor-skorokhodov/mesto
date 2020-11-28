@@ -9,3 +9,13 @@
     margin-right: auto;
     margin-bottom: 50px;
     margin-top: 0;
+}
+
+@media screen and (max-width: 950px) {
+    .popup__title {
+        font-style: normal;
+        font-weight: 900;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}

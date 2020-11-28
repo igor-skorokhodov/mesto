@@ -11,12 +11,12 @@
     margin-right: auto;
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 950px) {
     .footer {
-        flex-direction: column;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 64px;
+        width: 69%;
+        margin-top: 48px;
+        font-size: 14px;
+        line-height: 17px;
     }
 }
 

@@ -8,3 +8,15 @@
     "avatar name button"
     "avatar profession .";
 }
+
+@media screen and (max-width: 950px) {
+    .profile__container {
+        grid-template-columns: 188px;
+        justify-items: center;
+        grid-template-areas: 
+        "avatar avatar"
+        "name button"
+        "profession profession";
+        margin-bottom: 36px;
+    }
+}

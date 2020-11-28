@@ -14,3 +14,16 @@
     text-align: center;
     color: #FFFFFF;
 }
+
+.popup__submit-button:hover {
+    opacity: 0.8;
+}
+
+@media screen and (max-width: 950px) {
+    .popup__submit-button {
+        height: 46px;
+        width: 238px;
+        font-size: 14px;
+        line-height: 17px;
+    }
+}
