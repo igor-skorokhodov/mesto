@@ -56,7 +56,6 @@ function closePopup() {
    });
  });
 
- console.log(heart);
 
 
 
