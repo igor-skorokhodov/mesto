@@ -8,7 +8,7 @@ let placeHolderName = name.textContent;
 let placeHolderProfession = profession.textContent;
 let formElementName = document.querySelector('.popup__form_name');
 let formElementJob = document.querySelector('.popup__form_job');
-console.log(name.textContent);
+
 
 
 function addPopup() {
