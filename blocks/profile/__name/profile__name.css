@@ -9,12 +9,14 @@
     grid-column: 1;
     grid-area: name;
     align-self: flex-end;
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    overflow: hidden;
+    max-width: 100%;
 }
 
 @media screen and (max-width: 950px) {
     .profile__name {
-        font-style: normal;
-        font-weight: 500;
         font-size: 27px;
         line-height: 33px;
     }

@@ -3,9 +3,9 @@
     padding: 0;
     width: 23px;
     height: 23px;
-    background: transparent;
     border: none;
     align-items: center;
+    background: url(../../../images/heart_disabled.svg) no-repeat scroll 0 0 transparent;
 }
 
 .element__heart:hover {
@@ -13,6 +13,10 @@
 }
 
 .element__heart:focus {
-    border: none;
-    outline: none !important;
+    outline: none;
+    opacity: 1;
     }
+
+.element__heart:active {
+    background: url(../../../images/heart_anabled.svg) no-repeat scroll 0 0 transparent;
+}

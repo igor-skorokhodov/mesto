@@ -11,7 +11,8 @@
 
 @media screen and (max-width: 950px) {
     .profile__container {
-        grid-template-columns: 188px;
+        grid-template-columns: 220px;
+        gap: 10px;
         justify-items: center;
         grid-template-areas: 
         "avatar avatar"
