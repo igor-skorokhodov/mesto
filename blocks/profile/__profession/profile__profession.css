@@ -7,8 +7,8 @@
     grid-column: 1;
     grid-area: profession;
     align-self: flex-start;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
 }

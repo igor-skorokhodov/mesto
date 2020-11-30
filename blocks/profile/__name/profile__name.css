@@ -9,8 +9,8 @@
     grid-column: 1;
     grid-area: name;
     align-self: flex-end;
-    text-overflow: ellipsis; 
-    white-space: nowrap; 
+    text-overflow: ellipsis;
+    white-space: nowrap;
     overflow: hidden;
     max-width: 100%;
 }
