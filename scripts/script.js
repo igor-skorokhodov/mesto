@@ -6,8 +6,8 @@ let profession = document.querySelector('.profile__profession');
 let popUp = document.querySelector('.popup');
 let placeHolderName = name.textContent;
 let placeHolderProfession = profession.textContent;
-let formElementName = document.querySelector('.popup__form_name');
-let formElementJob = document.querySelector('.popup__form_job');
+let formElementName = document.querySelector('.popup__form-name');
+let formElementJob = document.querySelector('.popup__form-job');
 
 
 
