@@ -6,8 +6,9 @@ let profession = document.querySelector('.profile__profession');
 let popUp = document.querySelector('.popup');
 let placeHolderName = name.textContent;
 let placeHolderProfession = profession.textContent;
-let formElementName = document.querySelector('.popup__form-name');
-let formElementJob = document.querySelector('.popup__form-job');
+let formElementName = document.querySelector('.popup__form_info_name');
+let formElementJob = document.querySelector('.popup__form_info_job');
+let form = document.querySelector('.popup__form-input')
 
 
 
@@ -15,26 +16,23 @@ function addPopup() {
    popUp.classList.add('popup_active');
    formElementName.value = name.textContent;
    formElementJob.value = profession.textContent;
+
 }
 
 function closePopup() {
     popUp.classList.remove('popup_active');
  }
 
- function editInfo () {
-    function formSubmitHandler (evt) {
-        evt.preventDefault();
-    }
-    let nameInput = formElementName.value;
-    let jobInput = formElementJob.value;
-    name.textContent=nameInput;
-    profession.textContent=jobInput;
-    closePopup();
- }
+ function editInfo (evt) {
+   evt.preventDefault();
+   name.textContent=formElementName.value;
+   profession.textContent=formElementJob.value;
+   closePopup();
+}
  
  editButton.addEventListener('click', addPopup); 
  closeButton.addEventListener('click', closePopup);
- submitButton.addEventListener('click', editInfo);
+ form.addEventListener('submit', editInfo);
 
 
 
