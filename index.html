@@ -23,51 +23,21 @@
       </section>
 
       <section class="elements">
-        <article class="element">
-          <img class="element__picture" src="images/karachaevsk.jpg" alt="карачаевск">
-          <div class="element__container">
-            <h3 class="element__title">Карачаевск</h3>
+      <template id="card">
+      <article class="element">
+        <div>
+        <img class="element__picture" src="images/dombai.jpg" alt="Домбай">
+        <button class="element__trash" type="button" aria-label="Удалить карточку"></button>
+        </div class="element__">
+        <div class="element__container">
+          <h3 class="element__title">Домбай</h3>
           <button class="element__heart" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__picture" src="images/elbrus.jpg" alt="гора эльбрус">
-          <div class="element__container">
-            <h3 class="element__title">Гора Эльбрус</h3>
-            <button class="element__heart" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__picture" src="images/dombai.jpg" alt="домбай">
-          <div class="element__container">
-            <h3 class="element__title">Домбай</h3>
-            <button class="element__heart" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__picture" src="images/karachaevsk.jpg" alt="карачаевск">
-          <div class="element__container">
-            <h3 class="element__title">Карачаевск</h3>
-            <button class="element__heart" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__picture" src="images/elbrus.jpg" alt="Гора Эльбрус">
-          <div class="element__container">
-            <h3 class="element__title">Гора Эльбрус</h3>
-            <button class="element__heart" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-        <article class="element">
-          <img class="element__picture" src="images/dombai.jpg" alt="Домбай">
-          <div class="element__container">
-            <h3 class="element__title">Домбай</h3>
-            <button class="element__heart" type="button" aria-label="Лайк"></button>
-          </div>
-        </article>
-      </section>
+        </div>
+      </article>
+    </template>
+    </section>
 
-      <section class="popup">
+      <section id="edit" class="popup">
         <div class="popup__container">
           <button class="popup__close-button" type="button" aria-label="Закрыть окно"></button>
           <h3 class="popup__title">Редактировать профиль</h3>
@@ -76,6 +46,26 @@
             <input class="popup__form popup__form_info_job" type="text" name="job">
             <button type="submit" class="popup__submit-button" aria-label="Сохранить информацию в профиле">Сохранить</button>
           </form>
+        </div>
+      </section>
+
+      <section id="add" class="popup">
+        <div class="popup__container popup__container_size">
+          <button class="popup__close-button popup__close-button_position-add" type="button" aria-label="Закрыть окно"></button>
+          <h3 class="popup__title popup__title_output">Новое место</h3>
+          <form class="popup__form-input" name="form redaction">
+            <input class="popup__form popup__form_info_name-picture" type="text" name="palce name" placeholder="Название">
+            <input class="popup__form popup__form_info_url" type="text" name="place url"  placeholder="Ссылка на картинку">
+            <button type="submit" class="popup__add-button" aria-label="Добавить карточку">Создать</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="picture" class="popup">
+        <div class="popup__container-picture">
+          <button class="popup__close-button popup__close-button_position" type="button" aria-label="Закрыть окно"></button>
+          <img class="popup__picture" src="" alt="Развернутая картика">
+          <p class="popup__sign">Новое место</p>
         </div>
       </section>
 

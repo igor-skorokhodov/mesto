@@ -2,6 +2,7 @@
     width: 430px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     background-color: white;
     border-radius: 10px 10px 10px 10px;
 }
