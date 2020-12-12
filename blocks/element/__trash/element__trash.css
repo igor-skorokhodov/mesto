@@ -8,6 +8,7 @@
     border: none;
     background: url(../../../images/trash.svg) no-repeat scroll 0 0 transparent;
     background-position: center;
+    cursor: pointer;
     
 }
 

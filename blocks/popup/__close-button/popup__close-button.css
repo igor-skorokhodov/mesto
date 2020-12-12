@@ -11,6 +11,7 @@
     margin: 0;
     background: url(../../../images/close_icon_b.svg) no-repeat scroll 0 0 transparent;
     background-position: center;
+    cursor: pointer;
 }
 
 .popup__close-button:hover {

@@ -6,6 +6,7 @@
     border-radius: 2px;
     background: url(../../../images/plus.svg) no-repeat scroll 0 0 transparent;
     background-position: center;
+    cursor: pointer;
 }
 
 .profile__add-button:active {
