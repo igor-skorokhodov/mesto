@@ -5,22 +5,27 @@ const submitButton = document.querySelector('.popup__submit-button');
 const closeButtonEdit = document.querySelector("#close_button_edit");
 const closeButtonAdd = document.querySelector("#close_button_add");
 const closeButtonPicture = document.querySelector("#close_button_picture");
-let nameProfile = document.querySelector('.profile__name');
-let profession = document.querySelector('.profile__profession');
+const nameProfile = document.querySelector('.profile__name');
+const profession = document.querySelector('.profile__profession');
 const popUpEdit = document.querySelector('#edit');
 const popUpAdd = document.querySelector('#add');
 const popUpPicture = document.querySelector('#picture');
-let placeHolderName = nameProfile.textContent;
-let placeHolderProfession = profession.textContent;
-let formElementName = document.querySelector('.popup__form_info_name');
-let formElementJob = document.querySelector('.popup__form_info_job');
-let nameCard = document.querySelector('.popup__form_info_name-picture');
-let nameUrl = document.querySelector('.popup__form_info_url');
+const placeHolderName = nameProfile.textContent;
+const placeHolderProfession = profession.textContent;
+const formElementName = document.querySelector('.popup__form_info_name');
+const formElementJob = document.querySelector('.popup__form_info_job');
+const nameCard = document.querySelector('.popup__form_info_name-picture');
+const nameUrl = document.querySelector('.popup__form_info_url');
 const formEditInfo = document.querySelector('#form_redaction');
 const formAddPicture = document.querySelector('#form_add');
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.elements');
+const handleLikeIcon = (evt) => {
+    evt.target.classList.toggle('element__heart_anabled');
+};
 
+const deleteHandleIcon = (evt) => {
+    evt.target.parentElement.parentElement.remove();}
 
 const initialCards = [
    {
@@ -72,22 +77,20 @@ function editInfo (evt) {
  }
 
 
-function createCard(name, link) {
+function createCard (name, link) {
     const element = cardTemplate.cloneNode(true);
-    namingNewCard(element, name, link);
-    return element;
-}
-
-function namingNewCard (card, name, link) {
-    const elementTitle = card.querySelector('.element__title');
-    const elementPicture = card.querySelector('.element__picture'); 
+    const elementTitle = element.querySelector('.element__title');
+    const elementPicture = element.querySelector('.element__picture');
+    const likeButton = element.querySelector('.element__heart');
+    const deleteButton = element.querySelector('.element__trash');
     elementTitle.textContent = name;
     elementPicture.src = link;
     elementPicture.alt = 'Картинка карточки';
-    likeCard(card);
-    deleteCard(card);
-    picturePopup(card);
-}
+    likeButton.addEventListener('click', handleLikeIcon);
+    deleteButton.addEventListener('click', deleteHandleIcon);
+    picturePopup(element);
+    return element;
+}   
 
 function addCard(container, cardElement) {
     container.prepend(cardElement);
@@ -99,28 +102,19 @@ function addCard(container, cardElement) {
     })}
     
 function likeCard(card) {
-    let likeElement = card.querySelector('.element__heart'); 
         likeElement.addEventListener('click', function (evt) {
         let eventTarget = evt.target;
         eventTarget.classList.toggle('element__heart_anabled');})}
 
 
-
-function deleteCard(card) {
-    let deleteCard = card.querySelector('.element__trash');
-    let parent1 = deleteCard.parentElement;
-    let parent2 = parent1.parentElement;
-    deleteCard.addEventListener('click', function () {
-        parent2.remove();})
-}
-
 function picturePopup(card) {
-    let picturePopup = card.querySelector('.element__picture');
-    let fullPicture = document.querySelector('.popup__picture');
-    let textPicture = document.querySelector('.popup__sign');
-    let sign = picturePopup.parentElement.nextElementSibling.firstElementChild;
+    const picturePopup = card.querySelector('.element__picture');
+    const fullPicture = document.querySelector('.popup__picture');
+    const textPicture = document.querySelector('.popup__sign');
+    const sign = picturePopup.parentElement.nextElementSibling.firstElementChild;
     picturePopup.addEventListener('click', function () {
     fullPicture.src = picturePopup.src;
+    fullPicture.alt = "Место крупным планом";
     textPicture.textContent = sign.textContent;
     openPopup(popUpPicture);
     })};
