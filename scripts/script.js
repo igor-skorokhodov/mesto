@@ -93,13 +93,10 @@ function createCard (name, link) {
     const elementPicture = element.querySelector('.element__picture');
     const likeButton = element.querySelector('.element__heart');
     const deleteButton = element.querySelector('.element__trash');
-    const picturePopup = element.querySelector('.element__picture');
-    const fullPicture = document.querySelector('.popup__picture');
-    const textPicture = document.querySelector('.popup__sign');
     elementTitle.textContent = name;
     elementPicture.src = link;
     elementPicture.alt = 'Картинка карточки';
-    picturePopup.addEventListener('click', () => {popupWindow(name, link)});
+    elementPicture.addEventListener('click', () => {popupWindow(name, link)});
     likeButton.addEventListener('click', handleLikeIcon);
     deleteButton.addEventListener('click', deleteHandleIcon);
     return element;
