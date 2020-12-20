@@ -116,7 +116,7 @@ function addCard(container, cardElement) {
     
 
  editButton.addEventListener('click', editProfile); 
- addButton.addEventListener('click', (item) => {openPopup(popUpAdd)}); 
+ addButton.addEventListener('click', () => {openPopup(popUpAdd)}); 
  formEditInfo.addEventListener('submit', editInfo);
  formAddPicture.addEventListener('submit', (evt) => {
      evt.preventDefault();
