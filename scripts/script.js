@@ -20,12 +20,22 @@ const formEditInfo = document.querySelector('#form_redaction');
 const formAddPicture = document.querySelector('#form_add');
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.elements');
+
 const handleLikeIcon = (evt) => {
     evt.target.classList.toggle('element__heart_anabled');
 };
 
 const deleteHandleIcon = (evt) => {
     evt.target.parentElement.parentElement.remove();}
+
+const popupWindow = (name, link) => {
+    const fullPicture = document.querySelector('.popup__picture');
+    const textPicture = document.querySelector('.popup__sign');
+    fullPicture.src = link;
+    fullPicture.alt = "Место крупным планом";
+    textPicture.textContent = name;
+    openPopup(popUpPicture);
+}
 
 const initialCards = [
    {
@@ -83,12 +93,15 @@ function createCard (name, link) {
     const elementPicture = element.querySelector('.element__picture');
     const likeButton = element.querySelector('.element__heart');
     const deleteButton = element.querySelector('.element__trash');
+    const picturePopup = element.querySelector('.element__picture');
+    const fullPicture = document.querySelector('.popup__picture');
+    const textPicture = document.querySelector('.popup__sign');
     elementTitle.textContent = name;
     elementPicture.src = link;
     elementPicture.alt = 'Картинка карточки';
+    picturePopup.addEventListener('click', () => {popupWindow(name, link)});
     likeButton.addEventListener('click', handleLikeIcon);
     deleteButton.addEventListener('click', deleteHandleIcon);
-    picturePopup(element);
     return element;
 }   
 
@@ -97,28 +110,10 @@ function addCard(container, cardElement) {
  }
 
  function containerAddPicture (container, massive) {
-    container.forEach(function(item) {
+    container.forEach((item) => {
         addCard(massive, createCard(item.name, item.link));
     })}
     
-function likeCard(card) {
-        likeElement.addEventListener('click', function (evt) {
-        let eventTarget = evt.target;
-        eventTarget.classList.toggle('element__heart_anabled');})}
-
-
-function picturePopup(card) {
-    const picturePopup = card.querySelector('.element__picture');
-    const fullPicture = document.querySelector('.popup__picture');
-    const textPicture = document.querySelector('.popup__sign');
-    const sign = picturePopup.parentElement.nextElementSibling.firstElementChild;
-    picturePopup.addEventListener('click', function () {
-    fullPicture.src = picturePopup.src;
-    fullPicture.alt = "Место крупным планом";
-    textPicture.textContent = sign.textContent;
-    openPopup(popUpPicture);
-    })};
-
 
  editButton.addEventListener('click', editProfile); 
  addButton.addEventListener('click', (item) => {openPopup(popUpAdd)}); 
@@ -127,7 +122,7 @@ function picturePopup(card) {
      evt.preventDefault();
      addCard(cards, createCard(nameCard.value, nameUrl.value)); 
      closePopup(popUpAdd)});
- closeButtonEdit.addEventListener('click', (item) => {closePopup(popUpEdit)});
- closeButtonAdd.addEventListener('click', (item) => {closePopup(popUpAdd)});
- closeButtonPicture.addEventListener('click', (item) => {closePopup(popUpPicture)});
+ closeButtonEdit.addEventListener('click', () => {closePopup(popUpEdit)});
+ closeButtonAdd.addEventListener('click', () => {closePopup(popUpAdd)});
+ closeButtonPicture.addEventListener('click', () => {closePopup(popUpPicture)});
  containerAddPicture(initialCards, cards);
