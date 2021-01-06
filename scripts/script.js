@@ -20,6 +20,8 @@ const formEditInfo = document.querySelector('#form_redaction');
 const formAddPicture = document.querySelector('#form_add');
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.elements');
+const formElement = document.querySelector('.popup__form-input');
+const allPopup = document.querySelectorAll('.popup');
 
 const handleLikeIcon = (evt) => {
     evt.target.classList.toggle('element__heart_anabled');
@@ -72,7 +74,7 @@ function closePopup(item) {
     item.classList.remove('popup_active');
     }
 
-function editProfile() {
+function editProfile () {
    openPopup(popUpEdit);
    formElementName.value = nameProfile.textContent;
    formElementJob.value = profession.textContent;
@@ -111,15 +113,43 @@ function addCard(container, cardElement) {
         addCard(massive, createCard(item.name, item.link));
     })}
     
+formElement.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+});
 
- editButton.addEventListener('click', editProfile); 
- addButton.addEventListener('click', () => {openPopup(popUpAdd)}); 
- formEditInfo.addEventListener('submit', editInfo);
- formAddPicture.addEventListener('submit', (evt) => {
-     evt.preventDefault();
-     addCard(cards, createCard(nameCard.value, nameUrl.value)); 
-     closePopup(popUpAdd)});
- closeButtonEdit.addEventListener('click', () => {closePopup(popUpEdit)});
- closeButtonAdd.addEventListener('click', () => {closePopup(popUpAdd)});
- closeButtonPicture.addEventListener('click', () => {closePopup(popUpPicture)});
- containerAddPicture(initialCards, cards);
+function closingPopup (item, popup) {
+  if (item.target.classList.contains('popup')) {
+    closePopup(popup);}
+}
+
+function closingPopupEsc (evt) {
+  allPopup.forEach ((popup) => {
+    if(evt.keyCode === 27) {
+      popup.classList.remove('popup_active');}})
+    }
+
+editButton.addEventListener('click', editProfile); 
+addButton.addEventListener('click', () => {openPopup(popUpAdd)});
+submitButton.addEventListener('click', editInfo);
+formAddPicture.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+  addCard(cards, createCard(nameCard.value, nameUrl.value)); 
+  closePopup(popUpAdd)});
+popUpEdit.addEventListener('click', (evt) => {
+  closingPopup(evt, popUpEdit);
+});
+document.addEventListener('keydown', (evt) => {
+  closingPopupEsc(evt);
+});
+popUpAdd.addEventListener('click', (evt) => {
+  closingPopup(evt, popUpAdd);
+});
+popUpPicture.addEventListener('click', (evt) => {
+  closingPopup(evt, popUpPicture);
+});
+  
+closeButtonEdit.addEventListener('click', () => {closePopup(popUpEdit)});
+closeButtonAdd.addEventListener('click', () => {closePopup(popUpAdd)});
+closeButtonPicture.addEventListener('click', () => {closePopup(popUpPicture)});
+containerAddPicture(initialCards, cards);
+

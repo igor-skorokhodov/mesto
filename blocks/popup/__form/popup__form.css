@@ -5,3 +5,7 @@
     font-size: 14px;
     line-height: 17px;
 }
+
+.popup__form:invalid {
+    border-bottom: 1px solid red; /* красная рамка для некорректных данных */
+  } 
