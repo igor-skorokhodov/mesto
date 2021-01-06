@@ -8,14 +8,14 @@ const settings = {
 }
 
 const showInputError = (obj, formElement, inputElement, errorMessage) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = formElement.querySelector(`.${inputElement.id}`);
     inputElement.classList.add(obj.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(obj.errorClass);
 };
       
 const hideInputError = (obj, formElement, inputElement) => {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+    const errorElement = formElement.querySelector(`.${inputElement.id}`);
     inputElement.classList.remove(obj.inputErrorClass);
     errorElement.classList.remove(obj.errorClass);
     errorElement.textContent='';
