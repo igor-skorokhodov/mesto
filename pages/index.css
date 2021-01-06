@@ -43,6 +43,6 @@
 @import url(../blocks/element/__heart/_anabled/element__heart_anabled.css);
 @import url(../blocks/background/background.css);
 @import url(../blocks/popup/__form-input/popup__form-input-error.css);
-@import url(../blocks/popup/__form-input/popup__form_error.css);
+@import url(../blocks/popup/__form-input/popup__form-error.css);
 @import url(../blocks/popup/__form-input/popup__form_error-active.css);
 @import url(../blocks/popup/__inactive/form__inactive.css);
