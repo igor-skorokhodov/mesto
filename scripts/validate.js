@@ -3,7 +3,7 @@ const settings = {
     inputSelector: '.popup__form',
     submitButtonSelector: '.popup__submit',
     inactiveButtonClass: 'form__inactive',
-    inputErrorClass: 'popup__form_error',
+    inputErrorClass: 'popup__form-error',
     errorClass: 'popup__form_error-active'
 }
 
