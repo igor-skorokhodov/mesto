@@ -10,6 +10,7 @@ const settings = {
 const showInputError = (obj, formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}`);
     inputElement.classList.add(obj.inputErrorClass);
+    inputElement.style.borderBottom = "1px solid red";
     errorElement.textContent = errorMessage;
     errorElement.classList.add(obj.errorClass);
 };
@@ -17,6 +18,7 @@ const showInputError = (obj, formElement, inputElement, errorMessage) => {
 const hideInputError = (obj, formElement, inputElement) => {
     const errorElement = formElement.querySelector(`.${inputElement.id}`);
     inputElement.classList.remove(obj.inputErrorClass);
+    inputElement.style.borderBottom = "1px solid rgba(0, 0, 0, 0.2)";
     errorElement.classList.remove(obj.errorClass);
     errorElement.textContent='';
 };
@@ -50,10 +52,6 @@ const setEventListeners = (obj, formElement) => {
     const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
     const buttonElement = formElement.querySelector(obj.submitButtonSelector);
     toggleButtonState(obj, inputList, buttonElement);
-    if (buttonElement.classList.contains('popup__submit-button')) {
-        buttonElement.classList.remove('form__inactive');
-        buttonElement.disabled = false;
-    }
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         isValid(obj, formElement, inputElement)
