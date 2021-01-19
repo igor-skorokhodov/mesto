@@ -1,3 +1,5 @@
+import {Card} from './card.js'
+
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 const submitButton = document.querySelector('.popup__submit-button');
@@ -5,7 +7,6 @@ const nameProfile = document.querySelector('.profile__name');
 const profession = document.querySelector('.profile__profession');
 const popUpEdit = document.querySelector('#edit');
 const popUpAdd = document.querySelector('#add');
-const popUpPicture = document.querySelector('#picture');
 const placeHolderName = nameProfile.textContent;
 const placeHolderProfession = profession.textContent;
 const formElementName = document.querySelector('.popup__form_info_name');
@@ -18,22 +19,6 @@ const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.elements');
 const formElement = document.querySelector('.popup__form-input');
 const popups = document.querySelectorAll('.popup');
-const fullPicture = document.querySelector('.popup__picture');
-const textPicture = document.querySelector('.popup__sign');
-
-const handleLikeIcon = (evt) => {
-    evt.target.classList.toggle('element__heart_anabled');
-};
-
-const deleteHandleIcon = (evt) => {
-    evt.target.parentElement.parentElement.remove();}
-
-const openPicturePopup = (name, link) => {
-    fullPicture.src = link;
-    fullPicture.alt = "Место крупным планом";
-    textPicture.textContent = name;
-    openPopup(popUpPicture);
-}
 
 const initialCards = [
    {
@@ -62,7 +47,7 @@ const initialCards = [
    }
 ];
 
-function openPopup (popup) {
+export function openPopup (popup) {
     popup.classList.add('popup_active');
     document.addEventListener('keydown', closeByEscape);
     }
@@ -85,31 +70,6 @@ function editInfo (evt) {
     profession.textContent=formElementJob.value;
     closePopup(popUpEdit);
  }
-
-
-function createCard (name, link) {
-    const element = cardTemplate.cloneNode(true);
-    const elementTitle = element.querySelector('.element__title');
-    const elementPicture = element.querySelector('.element__picture');
-    const likeButton = element.querySelector('.element__heart');
-    const deleteButton = element.querySelector('.element__trash');
-    elementTitle.textContent = name;
-    elementPicture.src = link;
-    elementPicture.alt = 'Картинка карточки' + name;
-    elementPicture.addEventListener('click', () => {openPicturePopup(name, link)});
-    likeButton.addEventListener('click', handleLikeIcon);
-    deleteButton.addEventListener('click', deleteHandleIcon);
-    return element;
-}   
-
-function addCard(container, cardElement) {
-    container.prepend(cardElement);
- }
-
- function createInitialCards (array, container) {
-    array.forEach((item) => {
-        addCard(container, createCard(item.name, item.link));
-    })}
     
 popups.forEach((popup) => {
     popup.addEventListener('click', (evt) => {
@@ -132,8 +92,15 @@ addButton.addEventListener('click', () => {openPopup(popUpAdd)});
 submitButton.addEventListener('click', editInfo);
 formAddPicture.addEventListener('submit', (evt) => {
   evt.preventDefault();
-  addCard(cards, createCard(nameCard.value, nameUrl.value));
+  const card = new Card (nameCard.value, nameUrl.value, cardTemplate);
+  card.addCardClass(cards);
   formAddPicture.reset()
   closePopup(popUpAdd)});
-createInitialCards(initialCards, cards);
 
+    function createInitialCards (array, container) {
+        array.forEach((item) => {
+            const card = new Card (item.name, item.link, cardTemplate);
+            card.addCardClass(container);
+        })}
+
+createInitialCards(initialCards, cards);
