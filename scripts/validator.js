@@ -42,21 +42,21 @@ export class Validator {
   }; 
   
   
-  _isValid(formElement, inputElement) {
+  _isValid(inputElement) {
     if (!inputElement.validity.valid) {
-        this._showInputError(formElement, inputElement, inputElement.validationMessage);
+        this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-          this._hideInputError(formElement, inputElement);
+          this._hideInputError(inputElement);
         }
   };
   
-  _setEventListeners(formElement){
-    const inputList = Array.from(formElement.querySelectorAll(this._inputSelector));
-    const buttonElement = formElement.querySelector(this._submitButtonSelector);
+  _setEventListeners(){
+    const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    const buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._isValid(formElement, inputElement)
+        this._isValid(inputElement)
         this._toggleButtonState(inputList, buttonElement);
       });
     });

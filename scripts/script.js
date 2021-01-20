@@ -15,6 +15,8 @@ const formAddPicture = document.querySelector('#form_add');
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.elements');
 const popups = document.querySelectorAll('.popup');
+const subButton = document.querySelector('.popup__add-button');
+
 
 const initialCards = [
    {
@@ -91,6 +93,8 @@ formAddPicture.addEventListener('submit', (evt) => {
   const card = new Card (nameCard.value, nameUrl.value, cardTemplate);
   card.addCardClass(cards);
   formAddPicture.reset();
+  subButton.classList.add('form__inactive');
+  subButton.disabled = true;
 closePopup(popUpAdd)});
 
 function createInitialCards (array, container) {
