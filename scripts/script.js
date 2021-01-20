@@ -7,17 +7,13 @@ const nameProfile = document.querySelector('.profile__name');
 const profession = document.querySelector('.profile__profession');
 const popUpEdit = document.querySelector('#edit');
 const popUpAdd = document.querySelector('#add');
-const placeHolderName = nameProfile.textContent;
-const placeHolderProfession = profession.textContent;
 const formElementName = document.querySelector('.popup__form_info_name');
 const formElementJob = document.querySelector('.popup__form_info_job');
 const nameCard = document.querySelector('.popup__form_info_name-picture');
 const nameUrl = document.querySelector('.popup__form_info_url');
-const formEditInfo = document.querySelector('#form_redaction');
 const formAddPicture = document.querySelector('#form_add');
 const cardTemplate = document.querySelector('#card').content;
 const cards = document.querySelector('.elements');
-const formElement = document.querySelector('.popup__form-input');
 const popups = document.querySelectorAll('.popup');
 
 const initialCards = [
@@ -85,7 +81,7 @@ popups.forEach((popup) => {
 function closeByEscape (evt) {
     if(evt.key === 'Escape') {
         const openedPopup = document.querySelector('.popup_active')
-        closePopup(openedPopup);}}
+    closePopup(openedPopup);}}
 
 editButton.addEventListener('click', editProfile); 
 addButton.addEventListener('click', () => {openPopup(popUpAdd)});
@@ -94,13 +90,13 @@ formAddPicture.addEventListener('submit', (evt) => {
   evt.preventDefault();
   const card = new Card (nameCard.value, nameUrl.value, cardTemplate);
   card.addCardClass(cards);
-  formAddPicture.reset()
-  closePopup(popUpAdd)});
+  formAddPicture.reset();
+closePopup(popUpAdd)});
 
-    function createInitialCards (array, container) {
-        array.forEach((item) => {
-            const card = new Card (item.name, item.link, cardTemplate);
-            card.addCardClass(container);
-        })}
+function createInitialCards (array, container) {
+    array.forEach((item) => {
+        const card = new Card (item.name, item.link, cardTemplate);
+        card.addCardClass(container);
+    })}
 
 createInitialCards(initialCards, cards);

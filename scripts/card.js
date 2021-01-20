@@ -27,7 +27,7 @@ export class Card {
         evt.target.classList.toggle('element__heart_anabled');
     }
     _deleteCard(evt) {
-        evt.target.parentElement.parentElement.remove();
+        evt.target.closest('.element').remove();
     }
 
     _addEventListeners() {

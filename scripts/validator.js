@@ -9,16 +9,16 @@ export class Validator {
       this._form = form;
     }
   
-    _showInputError(formElement, inputElement, errorMessage) {
-      const errorElement = formElement.querySelector(`.${inputElement.id}`);
+    _showInputError(inputElement, errorMessage) {
+      const errorElement = this._form.querySelector(`.${inputElement.id}`);
       inputElement.classList.add(this._inputErrorClass);
       inputElement.style.borderBottom = "1px solid red";
       errorElement.textContent = errorMessage;
       errorElement.classList.add(this._errorClass);
   };
   
-  _hideInputError(formElement, inputElement) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}`);
+  _hideInputError(inputElement) {
+    const errorElement = this._form.querySelector(`.${inputElement.id}`);
     inputElement.classList.remove(this._inputErrorClass);
     inputElement.style.borderBottom = "1px solid rgba(0, 0, 0, 0.2)";
     errorElement.classList.remove(this._errorClass);
