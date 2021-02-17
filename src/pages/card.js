@@ -1,11 +1,10 @@
-import {openPopup} from './script.js'
-
 export class Card {
-    constructor (name, link, tempalte) {
+    constructor (name, link, tempalte, open) {
         this._name = name;
         this._link = link;
         this._template = tempalte;
         this._element;
+        this._open = open;
     }
     createCard() {
         const element = this._template.cloneNode(true);
@@ -34,7 +33,7 @@ export class Card {
         const elementPicture = this._element.querySelector('.element__picture');
         const likeButton = this._element.querySelector('.element__heart');
         const deleteButton = this._element.querySelector('.element__trash');
-        elementPicture.addEventListener('click', () => {this._openPicturePopup(this._name, this._link)});
+        elementPicture.addEventListener('click', () => {this._openPicturePopup()});
         likeButton.addEventListener('click', this._likeCard);
         deleteButton.addEventListener('click', this._deleteCard);
     }
@@ -42,10 +41,9 @@ export class Card {
     _openPicturePopup() {
         const fullPicture = document.querySelector('.popup__picture');
         const textPicture = document.querySelector('.popup__sign');
-        const popUpPicture = document.querySelector('#picture');
         fullPicture.src = this._link;
         fullPicture.alt = "Место крупным планом";
         textPicture.textContent = this._name;
-        openPopup(popUpPicture);
-    }
+        this._open();
+}
 }

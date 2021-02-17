@@ -3,18 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
+ 
   <title>Место</title>
 </head>
 <body class="background">
   <div class="page">
     <header class="header">
-      <img class="header__logo" src="images/logo.svg" alt="лого">
+      <img class="header__logo" src="<%=require('./images/logo.svg')%>" alt="лого">
     </header>
     <main class="content">
       <section class="profile">
         <div class="profile__container">
-          <img class="profile__avatar" src="images/custo.png" alt="аватарка">
+          <img class="profile__avatar" src="<%=require('./images/custo.png')%>" alt="аватарка">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
           <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
           <p class="profile__profession">Исследователь океана</p>
@@ -45,9 +45,9 @@
           <button class="popup__close-button popup__close-button_position-add" type="button" aria-label="Закрыть окно" id="close_button_add"></button>
           <h3 class="popup__title popup__title_output">Новое место</h3>
           <form class="popup__form-input" name="form redaction" id="form_add" novalidate>
-            <input class="popup__form popup__form-input-error popup__form_info_name-picture" type="text" name="palce name" placeholder="Название" id="popup__form-error_name-picture" minlength="2" maxlength="30" required>
+            <input class="popup__form popup__form-input-error popup__form_info_name-picture" type="text" name="placename" placeholder="Название" id="popup__form-error_name-picture" minlength="2" maxlength="30" required>
             <span class="popup__form-error popup__form-error_name-picture"></span>
-            <input class="popup__form popup__form-input-error popup__form_info_url" type="url" name="place url"  placeholder="Ссылка на картинку" id="popup__form-error_url" required>
+            <input class="popup__form popup__form-input-error popup__form_info_url" type="url" name="placeurl"  placeholder="Ссылка на картинку" id="popup__form-error_url" required>
             <span class="popup__form-error popup__form-error_url"></span>
             <button type="submit" class="popup__add-button popup__submit" aria-label="Добавить карточку">Создать</button>
           </form>
@@ -57,7 +57,7 @@
       <div id="picture" class="popup">
         <div class="popup__container popup__container-picture">
           <button class="popup__close-button popup__close-button_position" type="button" aria-label="Закрыть окно" id="close_button_picture"></button>
-          <img class="popup__picture" src="images/dombai.jpg" alt="Развернутая картика">
+          <img class="popup__picture" src="<%=require('./images/dombai.jpg')%>" alt="Развернутая картика">
           <p class="popup__sign">Новое место</p>
         </div>
       </div>
@@ -82,7 +82,5 @@
    </template>
 
 </div>
-<script type="module" src="scripts/validate.js"></script>
-<script type="module" src="scripts/script.js"></script>
 </body>
 </html>
