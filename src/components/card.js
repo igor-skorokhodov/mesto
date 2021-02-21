@@ -1,10 +1,10 @@
 export class Card {
-    constructor (name, link, tempalte, open) {
+    constructor (name, link, tempalte, handleCardClick) {
         this._name = name;
         this._link = link;
         this._template = tempalte;
         this._element;
-        this._open = open;
+        this._handleCardClick = handleCardClick;
     }
     createCard() {
         const element = this._template.cloneNode(true);
@@ -17,10 +17,6 @@ export class Card {
         this._addEventListeners();
         return this._element;
     }
-    addCardClass(container) {
-        const newCard = this.createCard();
-        container.prepend(newCard);
-     }
 
      _likeCard(evt) {
         evt.target.classList.toggle('element__heart_anabled');
@@ -30,20 +26,13 @@ export class Card {
     }
 
     _addEventListeners() {
-        const elementPicture = this._element.querySelector('.element__picture');
         const likeButton = this._element.querySelector('.element__heart');
         const deleteButton = this._element.querySelector('.element__trash');
-        elementPicture.addEventListener('click', () => {this._openPicturePopup()});
+        this._element.querySelector('.element__picture').addEventListener('click', () => {
+            this._handleCardClick(this._name, this._link)
+          });
         likeButton.addEventListener('click', this._likeCard);
         deleteButton.addEventListener('click', this._deleteCard);
     }
 
-    _openPicturePopup() {
-        const fullPicture = document.querySelector('.popup__picture');
-        const textPicture = document.querySelector('.popup__sign');
-        fullPicture.src = this._link;
-        fullPicture.alt = "Место крупным планом";
-        textPicture.textContent = this._name;
-        this._open();
-}
 }

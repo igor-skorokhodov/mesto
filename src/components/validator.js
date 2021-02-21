@@ -12,7 +12,6 @@ export class Validator {
     _showInputError(inputElement, errorMessage) {
       const errorElement = this._form.querySelector(`.${inputElement.id}`);
       inputElement.classList.add(this._inputErrorClass);
-      inputElement.style.borderBottom = "1px solid red";
       errorElement.textContent = errorMessage;
       errorElement.classList.add(this._errorClass);
   };
@@ -20,7 +19,6 @@ export class Validator {
   _hideInputError(inputElement) {
     const errorElement = this._form.querySelector(`.${inputElement.id}`);
     inputElement.classList.remove(this._inputErrorClass);
-    inputElement.style.borderBottom = "1px solid rgba(0, 0, 0, 0.2)";
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent='';
   };
@@ -52,6 +50,12 @@ export class Validator {
   
   _setEventListeners(){
     const inputList = Array.from(this._form.querySelectorAll(this._inputSelector));
+    this._form.addEventListener('reset', () => {
+      inputList.forEach((inputElement) => {
+          this._hideInputError(inputElement)
+          this._toggleButtonState(inputList, buttonElement);
+      })
+  });
     const buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._toggleButtonState(inputList, buttonElement);
     inputList.forEach((inputElement) => {
