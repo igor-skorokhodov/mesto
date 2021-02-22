@@ -1,13 +1,16 @@
 import './index.css';
 
-import {Card} from '../components/card.js'
-import {Section} from '../components/section.js'
-import {Validator} from '../components/validator.js'
-import {PopupWithForm} from '../components/popupwithform.js'
-import {PopupWithImage} from '../components/popupwithimage.js'
-import {UserInfo} from '../components/userinfo.js'
+import {Card} from '../components/Card.js'
+import {Section} from '../components/Section.js'
+import {Validator} from '../components/Validator.js'
+import {PopupWithForm} from '../components/PopupWithForm.js'
+import {PopupWithImage} from '../components/PopupWithImage.js'
+import {UserInfo} from '../components/UserInfo.js'
 import {editButton, addButton, cardTemplate, 
     settings, formList, initialCards} from '../components/constants.js'
+
+const formName = document.querySelector('.popup__form_info_name');
+const formJob = document.querySelector('.popup__form_info_job');
 
 formList.forEach((formElement) => { //вешаем валидацию на формы
     const form = new Validator (settings, formElement);
@@ -21,7 +24,6 @@ export const popupEdit = new PopupWithForm ('#edit', (input) => { //создае
  });
  popupEdit.setEventListeners(); //вешаем на эту форму слушатели
  
- const popupEditObject = editProfile.getUserInfo(); //создаем объект с данными пользвателя
 
 export const popupAdd = new PopupWithForm ('#add', (object) => { //создали попап добавления карточки
     const array = [];
@@ -42,6 +44,10 @@ export const popupAdd = new PopupWithForm ('#add', (object) => { //создал�
 
 editButton.addEventListener('click', ()=> { //слушаем кнопку открытия окна редактирования профиля
     popupEdit.open();
+    const popupEditObject = editProfile.getUserInfo(); 
+    formName.value = popupEditObject.name;
+    formJob.value = popupEditObject.job;
+    setUserInformation(popupEditObject); //исполнили функцию
     });
  
 addButton.addEventListener('click', () => { //открытие попапа для добавления карточки
@@ -64,8 +70,6 @@ function handleCardClick(name, link) { //функция открытия кар�
 }
 
 function setUserInformation (input) { //функция добавления информации о пользователе в инпутах
-    const formName = document.querySelector('.popup__form_info_name');
-    const formJob = document.querySelector('.popup__form_info_job');
     formName.value = input.name;
     formJob.value = input.job;
 }
@@ -75,4 +79,3 @@ function addCard (name, link) { //функция добавления карто
     return card.createCard();
 }
      
-setUserInformation(popupEditObject); //исполнили функцию
