@@ -2,7 +2,7 @@ import './index.css';
 
 import {Card} from '../components/Card.js'
 import {Section} from '../components/Section.js'
-import {Validator} from '../components/Validator.js'
+import {Validator} from '../components/FormValidator.js'
 import {PopupWithForm} from '../components/PopupWithForm.js'
 import {PopupWithImage} from '../components/PopupWithImage.js'
 import {UserInfo} from '../components/UserInfo.js'
