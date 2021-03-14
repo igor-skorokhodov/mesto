@@ -1,18 +1,24 @@
 import {Popup} from './popup'
 
 export class PopupWithForm extends Popup {
-    constructor(popupSelector, handleFormSubmit) {
+    constructor(popupSelector, handleFormSubmit, postUserInfo) {
         super(popupSelector);
         this._handleFormSubmit = handleFormSubmit;
         this._popupSelector = popupSelector;
         this._form = this._popup.querySelector('.popup__form-input');
+        this._postUserInfo = postUserInfo;
         
     }
 
+   
 
 setEventListeners() {
           this._form.addEventListener('submit', () => {
             this._handleFormSubmit(this._getInputValues());
+            this._postUserInfo(this._getInputValues());
+            if (this._formValues.name !== ''){
+            this._postUserInfo(this._formValues.name, this._formValues.job);
+            }
             this.close();
           });
           super.setEventListeners();
@@ -30,6 +36,7 @@ _getInputValues() {
         this._inputList.forEach(input => {
           this._formValues[input.name] = input.value;
         });
+        //this._formValues.name = this._formValues.name_pic;
         // возвращаем объект значений
         return this._formValues;
      

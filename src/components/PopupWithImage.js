@@ -13,5 +13,4 @@ open(name, link) {
         this._fullPicture.alt = "Место крупным планом";
         this._textPicture.textContent = name;
     }
-
 }

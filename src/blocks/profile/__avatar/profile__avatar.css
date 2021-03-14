@@ -10,3 +10,18 @@
         margin-bottom: 6px;
     }
 }
+
+.profile__avatar:hover ~ .profile__avatar_pen {
+    cursor: pointer;
+    align-items: center;
+    opacity: 1;
+    visibility: visible;
+}
+
+.profile__avatar:hover {
+    cursor: pointer;
+    align-items: center;
+    opacity: 0.2;
+  
+}
+
