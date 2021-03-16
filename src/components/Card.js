@@ -1,4 +1,3 @@
-
 export class Card {
     constructor (user, data, tempalte, handleCardClick, removeCardFunction, likeCardFunction) {
         this._name = data.name;
@@ -49,7 +48,7 @@ export class Card {
         evt.target.classList.toggle('element__heart_anabled');
      }
         
-    _deleteCard() {
+    deleteCard() {
         this._card.remove();
     }
 
@@ -57,7 +56,6 @@ export class Card {
         const likeButton = this._element.querySelector('.element__heart');
         const deleteButton = this._element.querySelector('.element__trash')
         const likes = this._element.querySelector('.element__likes');
-        const yesButton = document.querySelector('#questionButton');
         this._element.querySelector('.element__picture').addEventListener('click', () => {
             this._handleCardClick(this._name, this._link)
           });
@@ -66,7 +64,7 @@ export class Card {
             this._likeCardFunction();
             let i = 0;
             data.likes.forEach ((like) => {
-                if (like._id !== 'b7c08a2d642b994c394c506b') {
+                if (like._id !== this._idUser) {
                     i = i + 0;
                 } 
                 else {
@@ -84,10 +82,7 @@ export class Card {
         });
         if (this._idCardOwner === this._idUser) {
         deleteButton.addEventListener('click', () => {
-            this._removeCardFunction(data);
-            yesButton.addEventListener('click', () => {
-                this._deleteCard();
-            })
+            this._removeCardFunction();
            })}
             else {
                 deleteButton.remove();

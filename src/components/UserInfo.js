@@ -19,8 +19,14 @@ export class UserInfo {
         this._id = data._id;
         this._name = data.name;
         this._about = data.about;
-        this._avatar = data.avatar;
+        
         this._userNameSelector.textContent = this._name;
         this._jobSelector.textContent = this._about;
-         }
+    }
+
+    setAvatar(data) {
+        this._avatar = data.avatar;
+        const avatarPic = document.querySelector('.profile__avatar');
+        avatarPic.src = this._avatar;
+    }
 }

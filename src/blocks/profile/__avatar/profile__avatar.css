@@ -11,7 +11,7 @@
     }
 }
 
-.profile__avatar:hover ~ .profile__avatar_pen {
+.profile__avatar:hover ~ .profile__avatar-pen {
     cursor: pointer;
     align-items: center;
     opacity: 1;
