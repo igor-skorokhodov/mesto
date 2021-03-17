@@ -8,14 +8,7 @@ getUserInfo() { //подгрузили инфу о пользователе из
     return fetch(this._url+'users/me', {
         method: "GET",
         headers: this._headers
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    }).then((res) => this._getResponseData(res)) 
 }
 
 postUserInfo(name, about) { //загрузили инфу о пользователе на сервер
@@ -26,14 +19,7 @@ postUserInfo(name, about) { //загрузили инфу о пользоват�
             name: name,
             about: about
           })
-    }).then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-  
-        // если ошибка, отклоняем промис
-        return Promise.reject(`Ошибка: ${res.status}`);
-      });
+    }).then((res) => this._getResponseData(res)) 
 }
 
 getAllCards() { //загрузили все карточки

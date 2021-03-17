@@ -13,9 +13,6 @@ const avatar = document.querySelector('.profile__avatar-container');
 const formName = document.querySelector('.popup__form_info_name');
 const formJob = document.querySelector('.popup__form_info_job');
 const avatarPic = document.querySelector('.profile__avatar');
-const pen = document.querySelector('.profile__avatar-pen');
-pen.onmouseover = function(){avatarPic.style.opacity = 0.2};
-pen.onmouseout = function(){avatarPic.style.opacity = 1};
 const userName = document.querySelector('.profile__name');
 const userJob = document.querySelector('.profile__profession');
 
@@ -46,9 +43,9 @@ Promise.all([     //в Promise.all передаем массив промисо�
         .then((values)=>{  //попадаем сюда, когда оба промиса будут выполнены
             editProfile.setUserInfo(values[0]);
             editProfile.setAvatar(values[0]);
-            setUserInformation(values[0]);
+            values[1].reverse();
             values[1].forEach ((value) => { const card = addCard(editProfile, value);
-                formPopupCard.addItem(card);})
+                formPopupCard.addItem(card);});
             formPopupCard.renderItems(values[1]);
            })  //прориосовали
     .catch((err) => {
@@ -61,21 +58,22 @@ editButton.addEventListener('click', ()=> { //слушаем кнопку отк
     setUserInfoValueInformation ();
 })
 
-const editSaveButton = document.querySelector('.popup__submit-button'); //кнопка меняет свой текст при сохранении данных формы на сервере
-editSaveButton.addEventListener('click', () => {
-    editSaveButton.innerText = 'Сохранение...';
-})
+const editSaveButton = document.querySelector('.popup__submit-button'); 
 
 export const popupEdit = new PopupWithForm ('#edit', (input) => {//создаем попап формы редактирования данных о пользователzя 
+    editSaveButton.innerText = "Сохранение..."; //кнопка меняет свой текст при сохранении данных формы на сервере
     api.postUserInfo(input.name, input.job) //загружаем данные формы о пользователе на сервер 
     .then((input) => {
-            setUserInformation(input);
+            editProfile.setUserInfo(input);;
             popupEdit.close();
-            editSaveButton.innerText = 'Сохранить'; 
             })
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-      })}, () => {});
+      })
+      .finally(() => {editSaveButton.innerText = 'Сохранить';})
+    }, () => {})
+    
+    
  popupEdit.setEventListeners();  //вешаем на эту форму слушатели
 
 
@@ -83,11 +81,10 @@ export const popupEdit = new PopupWithForm ('#edit', (input) => {//создае�
 ()  => {}, '.elements');
 
 
-const addSaveButton = document.querySelector('#saveAddButton'); //кнопка меняет свой текст при сохранении данных формы на сервере
-addSaveButton.addEventListener('click', () => {
-    addSaveButton.innerText = 'Сохранение...';
-})
+const addSaveButton = document.querySelector('#saveAddButton'); 
+
  export const popupAdd = new PopupWithForm ('#add', (object) => { //создали попап добавления карточки
+    addSaveButton.innerText = 'Сохранение...'; //кнопка меняет свой текст при сохранении данных формы на сервере
     const array = [];
     array.push(object);
     api.addNewCard(object.name_pic, object.link)
@@ -100,27 +97,26 @@ addSaveButton.addEventListener('click', () => {
         })
         .catch((err) => {
             console.log(err); // выведем ошибку в консоль
-          });
+          })
+        .finally(() => {addSaveButton.innerText = 'Сохранить';})
        formPopupCard.renderItems(array);},
 () => {},  () => {}); 
  popupAdd.setEventListeners(); //вешаем слушатели на форму добавления новой карточки
  
- const avatarSaveButton = document.querySelector('#avatarSaveButton'); //кнопка меняет свой текст при сохранении данных формы на сервере
- avatarSaveButton.addEventListener('click', () => {
-     avatarSaveButton.innerText = 'Сохранение...';
- })
+ const avatarSaveButton = document.querySelector('#avatarSaveButton'); 
 
  export const popupAvatar = new PopupWithForm ('#changeavatar', (object) => { //создали попап обновления аватара на сервере
+    avatarSaveButton.innerText = 'Сохранение...'; //кнопка меняет свой текст при сохранении данных формы на сервере
     api.userAvatarUpdate(object.avatar)
         .then(function () {
                 popupAvatar.close();
-                avatarSaveButton.innerText = 'Сохранить';
                 avatarPic.src = object.avatar;
             })
         .catch((err) => {
              console.log(err); // выведем ошибку в консоль
-              });
-    }, () => {}); 
+              })
+        .finally(() => {avatarSaveButton.innerText = 'Сохранить';})
+    }, () => {});
 popupAvatar.setEventListeners();
 
 
@@ -144,63 +140,51 @@ function handleCardClick(data) { //функция открытия карточ�
     popupWithImage.open(data.name, data.link);
 }
 
-function setUserInformation (input) { //функция добавления информации о пользователе в инпутах
-    userName.textContent = input.name;
-    userJob.textContent = input.about;
-    formName.value = input.name;
-    formJob.value = input.about;
-}
-
 function setUserInfoValueInformation () { //функция прописания данных в полях формы
     formName.value = userName.textContent;
     formJob.value = userJob.textContent;
 }
 
 function addCard (user, data) { //функция добавления карточки
-    const card = new Card (user, data, cardTemplate, () =>  {handleCardClick(data)}, () => {removeCardFunction(card, data)}, () => {likeCardFunction(data, user)}); 
+    const card = new Card (user, data, cardTemplate, () =>  {handleCardClick(data)}, () => {removeCardFunction(card, data)}, () => {likeCardFunction(card, data)}); 
     return card.createCard(data);
 }
 
 const deleteSaveButton = document.querySelector('#questionButton'); //кнопка меняет свой текст при удалении карточки с сервера
-deleteSaveButton.addEventListener('click', () => {
-    deleteSaveButton.innerText = 'Удаление...';
-})
 
 function removeCardFunction (card, data) { // колбэк удаления карточки
     deleteQuestion.open();
-    deleteSaveButton.addEventListener('click', deletingCard(card, data))
+    deleteSaveButton.addEventListener('click', () => {
+        deletingCard(card, data);
+        deleteSaveButton.innerText = 'Удаление...';},  {once: true})
 }
 
 function deletingCard (card, data) { //вывели апи удаления в отдельную функцию
     api.removeCard(data._id)
     .then(() => {
-    deleteQuestion.close()
-    deleteSaveButton.innerText = 'Да';
+    deleteQuestion.close();
     card.deleteCard()})
     .catch((err) => {
         console.log(err); // выведем ошибку в консоль
-         });
+         })
+    .finally(() => {deleteSaveButton.innerText = 'Да';})
 }
 
-function likeCardFunction (data, user) { //колбэк лайка карточки 
-    let i = 0;
-    data.likes.forEach ((like) => {
-      if (like._id !== user._id) {
-        i = i + 0;
-      } 
-      else {
-          i = i + 1;
-      }
-    })
-    if (i === 0) {
+function likeCardFunction (card, data) { //колбэк лайка карточки 
+    if (card.isLiked(data)) {
         api.setLike(data._id)
+        .then(() => {
+            card.likeCard(data);
+        })
         .catch((err) => {
             console.log(err); // выведем ошибку в консоль
-          });;
-
+          });
     }
     else {
         api.deleteLike(data._id)
+        .then(() => {
+            card.dislikeCard(data);
+        })
         .catch((err) => {
             console.log(err); // выведем ошибку в консоль
           });

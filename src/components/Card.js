@@ -12,20 +12,46 @@ export class Card {
         this._removeCardFunction = removeCardFunction;
         this._likeCardFunction = likeCardFunction;
         this._card = this._element.querySelector('.element');
+        this._heart = this._element.querySelector('.element__heart');
+        this._likes =this._element.querySelector('.element__likes');
     }
     createCard(data) {
         const elementTitle = this._element.querySelector('.element__title');
         const elementPicture = this._element.querySelector('.element__picture');
-        const elementLike = this._element.querySelector('.element__likes');
-        const heart = this._element.querySelector('.element__heart');
         elementTitle.textContent = this._name;
         elementPicture.src = this._link;
         elementPicture.alt = 'Картинка карточки ' + this._name;
-        elementLike.textContent = this._countLikes
         ;
+        if (this.isLiked(data)) {
+            this._heart.classList.remove('element__heart_anabled');
+            this._likes.textContent = data.likes.length;
+        }
+        else {
+            this._heart.classList.add('element__heart_anabled');
+            this._likes.textContent = data.likes.length;
+        }
+        this._addEventListeners(data);
+        
+        return this._element;
+    }
+
+     likeCard (data) {
+        this._heart.classList.add('element__heart_anabled');
+        this._likes.textContent = data.likes.length + 1;
+     }
+     
+     dislikeCard (data) {
+        this._heart.classList.remove('element__heart_anabled');
+        this._likes.textContent = data.likes.length - 1;
+     }
+    deleteCard() {
+        this._card.remove();
+    }
+
+    isLiked (data) {
         let i = 0;
         data.likes.forEach ((like) => {
-            if (like._id !== 'b7c08a2d642b994c394c506b') {
+            if (like._id !== this._idUser || like._id !== this._idUser) {
                 i = i + 0;
             } 
             else {
@@ -33,56 +59,25 @@ export class Card {
         }
         })
         if (i === 0) {
-            heart.classList.remove('element__heart_anabled');
-
+            return true;
         }
         else {
-            heart.classList.add('element__heart_anabled');
+            return false;
          }
-        this._addEventListeners(data);
-        
-        return this._element;
-    }
-
-     _likeCard (evt) {
-        evt.target.classList.toggle('element__heart_anabled');
-     }
-        
-    deleteCard() {
-        this._card.remove();
     }
 
     _addEventListeners(data) {
         const likeButton = this._element.querySelector('.element__heart');
         const deleteButton = this._element.querySelector('.element__trash')
-        const likes = this._element.querySelector('.element__likes');
         this._element.querySelector('.element__picture').addEventListener('click', () => {
             this._handleCardClick(this._name, this._link)
           });
-        likeButton.addEventListener('click', (evt) =>  {
-            this._likeCard(evt);
+        likeButton.addEventListener('click', () =>  {
             this._likeCardFunction();
-            let i = 0;
-            data.likes.forEach ((like) => {
-                if (like._id !== this._idUser) {
-                    i = i + 0;
-                } 
-                else {
-                  i = i + 1;
-            }
-            })
-            if (i === 0) {
-                likes.textContent = data.likes.length + 1;
-    
-            }
-            else {
-                likes.textContent = data.likes.length - 1;
-             }
-
         });
         if (this._idCardOwner === this._idUser) {
         deleteButton.addEventListener('click', () => {
-            this._removeCardFunction();
+            this._removeCardFunction(data);
            })}
             else {
                 deleteButton.remove();
